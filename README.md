@@ -31,7 +31,7 @@ For -d, Secret_Image.png has to be used.
 
 Examples:
 $ python steganography -e message.txt image1.png
-#  then
+(# then)
 $ python steganography -d message.txt Secret_Image.png
 
 Outputs:
