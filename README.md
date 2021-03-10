@@ -38,3 +38,6 @@ Outputs:
 The first line is just to encrypt and then encode the message into the picture. Nothing interesting happens, but
 a Secret_Image.png should pop out after running the first line.
 The second line will decrypt and decode the message from the picture and print it.
+
+# Credits
+tdai06, kkha all rights reserved.
