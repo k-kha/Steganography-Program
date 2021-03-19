@@ -1,7 +1,5 @@
 # Steganography Encryption System
 
-The code isn't entirely organized and the variable names aren't as clear, due to time constraints.
-
 # Dependencies:
 The program requires Python 3.
 The program should be executed in Python 3.7.
