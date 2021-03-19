@@ -15,6 +15,10 @@ from Crypto.Cipher import AES
 from Crypto import Random
 from Crypto.Protocol.KDF import PBKDF2
 
+from decode import decToBin
+from decode import get2LSB
+from decode import filter2LSB
+
 # 1111111111 Encoding 1111111111
 # returns the bytes needed from picture in binary
 def bytesNeededBin(bytes_needed, pixels_bin): 
@@ -165,50 +169,6 @@ def finalImage(data, new_pix, bytes_needed):
     return final
 # 1111111111 Encoding end 1111111111
 
-# 2222222222 Decoding 2222222222
-#converts the pixel bytes to binary
-def decToBin(dec):
-    secret_bin = []
-    for i in dec:
-        secret_bin.append(f'{i:08b}')
-    return secret_bin
-
-#gets the last 2 LSB of each byte
-def get2LSB(secret_bin): 
-    last2 = []
-    for i in secret_bin: 
-        for j in i[6:8]:
-            last2.append(j)
-    return last2
-
-def filter2LSB(listdict, last2):
-    piclsb = []
-    replaceNum = 0
-    index = 0
-
-    #the lower even or odd occurence gets replaced
-    if listdict['0']<2 or listdict['1']<2:
-        replaceNum = 0
-        listdict['2'] = '01'
-    elif listdict['0'] <= listdict['1']:
-        replaceNum = 0
-    else:
-        replaceNum = 1
-
-    #filters the right matching bits out of the image
-    for i in last2:
-        if int(listdict['2'][index])%2 == replaceNum:
-            piclsb.append(i)
-            index += 1
-            if index >= len(listdict['2']):
-                index = 0
-        else: 
-            index += 1
-            if index >= len(listdict['2']):
-                index = 0
-    return piclsb
-# 2222222222 Decoding end 2222222222
-    
 # 3333333333 Algorithm Implementation 3333333333
 def isPrime(n):
     if n < 2:
@@ -331,13 +291,12 @@ def main():
         im = im.convert('RGB')
         
         #Encryption:
-        # @@@@@@@@@@
         w, h = im.size
         sz = (w*h*3)/4
         data = np.array(im)
         encMsg = (encrypt(msg, pw))
         secMsg = encMsg.decode("utf-8")
-        # @@@@@@@@@@
+        
         listdict = getMod(w, h)
         #bytes_needed = (len(secMsg) * 4)
         bytes_needed = (len(secMsg) * 2 * len(listdict['2']))
