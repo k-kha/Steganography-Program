@@ -31,9 +31,9 @@ For -e, any picture you wish to hide your message in.
 For -d, Secret_Image.png has to be used.
 
 # Examples:
-$ python steganography -e message.txt image1.png
+$ python steganography.py -e message.txt image1.png
 
-$ python steganography -d message.txt Secret_Image.png
+$ python steganography.py -d message.txt Secret_Image.png
 
 Outputs:
 The first line is just to encrypt and then encode the message into the picture. Nothing interesting happens, but
