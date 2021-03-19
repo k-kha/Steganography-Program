@@ -1,4 +1,4 @@
-# 2222222222 Decoding 2222222222
+
 #converts the pixel bytes to binary
 def decToBin(dec):
     secret_bin = []
@@ -40,4 +40,3 @@ def filter2LSB(listdict, last2):
             if index >= len(listdict['2']):
                 index = 0
     return piclsb
-# 2222222222 Decoding end 2222222222
