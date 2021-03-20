@@ -15,6 +15,9 @@ from Crypto.Cipher import AES
 from Crypto import Random
 from Crypto.Protocol.KDF import PBKDF2
 
+from algorithm import isPrime
+from algorithm import nthPrime
+from algorithm import getMod
 from decode import decToBin
 from decode import get2LSB
 from decode import filter2LSB
