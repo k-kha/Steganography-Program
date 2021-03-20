@@ -16,7 +16,7 @@ from decode import decToBin
 from decode import get2LSB
 from decode import filter2LSB
 
-# 1111111111 Encoding 1111111111
+# Encoding
 # returns the bytes needed from picture in binary
 def bytesNeededBin(bytes_needed, pixels_bin): 
     pic_binary = []
@@ -164,7 +164,7 @@ def finalImage(data, new_pix, bytes_needed):
     #    print("Message has too much data, Input a bigger picture!")
     final = final.reshape(data.shape)
     return final
-# 1111111111 Encoding end 1111111111
+# Encoding end
           
 def encoding(data, listdict, bytes_needed, pixels_bin, msg):             
     a = bytesNeededBin(bytes_needed, pixels_bin) #picture in 8bit binary: ['11111111', ...]
