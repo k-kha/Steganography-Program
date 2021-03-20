@@ -1,7 +1,4 @@
-    # -*- coding: utf-8 -*-
 """
-Created on Wed Nov 18 01:40:12 2020
-
 @author: Tiancheng Dai and Kevin Kha
 """
 #pip3 install cryptography
