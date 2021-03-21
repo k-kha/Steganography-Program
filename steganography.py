@@ -15,6 +15,14 @@ from encryption import decrypt
 from decode import decToBin
 from decode import get2LSB
 from decode import filter2LSB
+from encode import bytesNeededBin
+from encode import bytesNeededDec
+from encode import msgBinary
+from encode import msgLSB
+from encode import mod2LSB
+from encode import binToDec
+from encode import newPixels
+from encode import finalImage
 
 # Encoding
 # returns the bytes needed from picture in binary
