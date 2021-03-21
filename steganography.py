@@ -25,15 +25,15 @@ from encode import newPixels
 from encode import finalImage
           
 def encoding(data, listdict, bytes_needed, pixels_bin, msg):             
-    a = bytesNeededBin(bytes_needed, pixels_bin) #picture in 8bit binary: ['11111111', ...]
-    c = msgBinary(msg) #message in 8 bit binary
-    d = msgLSB(c) #list individual binary: [0,1,...]
-    e = mod2LSB(listdict, a, d) # list 8bit binary: ['11111101', ...]
-    f = binToDec(e) #list of binary above to dec
-    h = newPixels(bytes_needed, data, f) #adds the decimal to list
-    i = finalImage(data, h, bytes_needed) #the list turns into the RGB image values
-    im2 = Image.fromarray((i).astype(np.uint8))
-    im2.save("Secret_Image.png")
+    picTo8BitBinary = bytesNeededBin(bytes_needed, pixels_bin) #picture in 8bit binary: ['11111111', ...]
+    msgTo8BitBinary = msgBinary(msg) #message in 8 bit binary
+    split8BitBinary = msgLSB(msgTo8BitBinary) #list individual binary: [0,1,...]
+    msgIn2LSB = mod2LSB(listdict, picTo8BitBinary, split8BitBinary) # list 8bit binary: ['11111101', ...]
+    LSBtoDec = binToDec(msgIn2LSB) #list of binary above to dec
+    newDecToList = newPixels(bytes_needed, data, LSBtoDec) #adds the decimal to list
+    rgbValues = finalImage(data, newDecToList, bytes_needed) #the list turns into the RGB image values
+    img2 = Image.fromarray((rgbValues).astype(np.uint8))
+    img2.save("Secret_Image.png")
 
     print("Encoding Success!")
     return 
