@@ -1,8 +1,6 @@
 from PIL import Image
 import numpy as np
-import sys
 
-# 1111111111 Encoding 1111111111
 # returns the bytes needed from picture in binary
 def bytesNeededBin(bytes_needed, pixels_bin): 
     pic_binary = []
@@ -75,7 +73,6 @@ def mod2LSB(listdict, pic_binary, msg_lsb):
         replaceNum = 0
     else:
         replaceNum = 1
-    #print(listdict)
     
     #replaces the digit
     for i in pixelsList:
@@ -93,17 +90,14 @@ def mod2LSB(listdict, pic_binary, msg_lsb):
             index += 1
             if index >= len(listdict['2']):
                 index = 0
-    #print(pixelsListStr)
     for i in pixelsListStr:
         pixelsList.append(i)
-    #print(pixelsList)
     
     #adding first 6 bits of picture with new 2 bits
     for i in pixelsList[::2]: 
         place7.append(str(i))
         for j in pixelsList[1::2]:
             place8.append(str(j))
-            #last2.append(str(j) + str(msg_lsb[msg_lsb.index(j)+1]))
     return ([x+y+z for x,y,z in zip(first6,place7,place8)])
 
 #convert binary to decimal
@@ -151,4 +145,3 @@ def finalImage(data, new_pix, bytes_needed):
     #    print("Message has too much data, Input a bigger picture!")
     final = final.reshape(data.shape)
     return final
-# 1111111111 Encoding end 1111111111
