@@ -32,31 +32,31 @@ def encoding(data, listdict, bytes_needed, pixels_bin, msg):
     LSBtoDec = binToDec(msgIn2LSB) #list of binary above to dec
     newDecToList = newPixels(bytes_needed, data, LSBtoDec) #adds the decimal to list
     rgbValues = finalImage(data, newDecToList, bytes_needed) #the list turns into the RGB image values
-    img2 = Image.fromarray((rgbValues).astype(np.uint8))
-    img2.save("Secret_Image.png")
+    secretImg = Image.fromarray((rgbValues).astype(np.uint8))
+    secretImg.save("Secret_Image.png")
 
     print("Encoding Success!")
     return 
  
 def decoding(data, listdict, bytes_needed, pixels_bin, pw):
 #def decoding(data, listdict, bytes_needed, pixels_bin):   
-    b = bytesNeededDec(data, bytes_needed)#picture in dec: ['255', ...]
-    c = decToBin(b) #picture from dec to 8-bit binary
-    d = get2LSB(c) #gets the 2 LSB from the list above
-    e = filter2LSB(listdict, d)
-    f = ''.join(map(str,[str(x) for x in e])) 
-    g = [f[i:i+8] for i in range(0, len(f), 8)] 
-    h = binToDec(g)
-    i = [chr(x) for x in h]
+    picToDec = bytesNeededDec(data, bytes_needed)#picture in dec: ['255', ...]
+    picToBin = decToBin(picToDec) #picture from dec to 8-bit binary
+    pic2Lsb = get2LSB(picToBin) #gets the 2 LSB from the list above
+    get2Lsb = filter2LSB(listdict, pic2Lsb)
+    combineLsb = ''.join(map(str,[str(x) for x in get2Lsb])) 
+    newPic2Lsb = [combineLsb[i:i+8] for i in range(0, len(combineLsb), 8)] 
+    newPicDec = binToDec(newPic2Lsb)
+    getChar = [chr(x) for x in newPicDec]
     
     print("The secret message is:")
-    j = ''.join(map(str,[str(x) for x in i]))
+    secretMsg = ''.join(map(str,[str(x) for x in getChar]))
     #print(j) #this line is for no encryption
 
     # Encryption:
-    k = j.encode("utf-8")  
-    l = decrypt(k,pw)
-    print(bytes.decode(l))
+    encodedMsg = secretMsg.encode("utf-8")  
+    finalMsg = decrypt(encodedMsg,pw)
+    print(bytes.decode(finalMsg))
     return
     
 def main(): 
